@@ -1,0 +1,175 @@
+/* Gradient background */
+.gradient-bg {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6dd5fa, #c850c0, #4158d0);
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+}
+
+/* Login card */
+.login-card {
+  background: #ffffff;
+  width: 380px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Error message */
+.error-msg {
+  color: red;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+/* Input fields */
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #c471ed;
+}
+
+/* Login button */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #56ccf2, #c471ed);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.login-btn:hover {
+  opacity: 0.85;
+}
+
+/* Divider text */
+.divider {
+  margin: 20px 0 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Social icons */
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.social-row img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.social-row img:hover {
+  transform: scale(1.1);
+}
+
+/* Register link */
+.register-link {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+.register-link span {
+  color: #c850c0;
+  font-weight: bold;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.register-link span:hover {
+  color: #4158d0;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Floating shapes */
+.gradient-bg::before,
+.gradient-bg::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  filter: blur(5px);
+  animation: float 6s infinite ease-in-out;
+}
+
+.gradient-bg::before {
+  top: 10%;
+  left: 15%;
+}
+
+.gradient-bg::after {
+  bottom: 12%;
+  right: 18%;
+  animation-duration: 7.5s;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Glass effect enhancement */
+.login-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
