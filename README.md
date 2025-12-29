@@ -32,7 +32,7 @@ SwiftBank Frontend is a modern, responsive web application built using React (Vi
 
     • HTML5 / CSS3 / JavaScript (ES6+)
 
-🔗 Backend Integration
+## 🔗 Backend Integration
 
     ° This frontend connects to the SwiftBank Backend, which provides:
 
