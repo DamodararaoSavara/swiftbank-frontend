@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "../../api/axios";
 import styles from "./AccountDetails.module.css";
 import { PlusCircle, MinusCircle, ArrowLeftRight, History } from "lucide-react";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import AccountDetailsSkeleton from "./AccountDetailsSkeleton";
 
 const AccountDetails = () => {
   const navigate = useNavigate();
@@ -12,7 +13,11 @@ const AccountDetails = () => {
   const [account, setAccount] = useState(null);
   const location = useLocation();
   const roles = JSON.parse(localStorage.getItem("roles")) || [];
+  const isInactive = account?.accountStatus !== "ACTIVE";
+  const fetched = useRef(false);
   useEffect(() => {
+    if (fetched.current) return;
+    fetched.current = true;
     if (location.state?.updatedAccount) {
       setAccount(location.state.updatedAccount);
       return;
@@ -26,7 +31,7 @@ const AccountDetails = () => {
       }
     };
     fetchAccount();
-  }, [accountId, location.state]);
+  }, [accountId]);
 
   const handleDeposit = () => {
     navigate(`/account/${accountId}/deposit`);
@@ -46,7 +51,7 @@ const AccountDetails = () => {
   const handleBack = () => {
     navigate("/dashboard");
   };
-  if (!account) return <p>Loading...</p>;
+  if (!account) return <AccountDetailsSkeleton />;
 
   return (
     <div className={styles.detailsContainer}>
@@ -62,7 +67,13 @@ const AccountDetails = () => {
       )}
       <div className={styles.header}>
         <h2 className={styles.title}>Account Details</h2>
-        <span className={styles.status}>{account.accountStatus}</span>
+        <span
+          className={`${styles.status} ${
+            account.accountStatus === "ACTIVE" ? styles.active : styles.inactive
+          }`}
+        >
+          {account.accountStatus}
+        </span>
       </div>
 
       <div className={styles.balanceCard}>
@@ -72,22 +83,22 @@ const AccountDetails = () => {
 
       <div className={styles.infoGrid}>
         <div className={styles.infoItem}>
-          <span>Account ID</span>
+          <span>Account ID </span>
           <strong>{account.accountId}</strong>
         </div>
 
         <div className={styles.infoItem}>
-          <span>Username</span>
+          <span>Username </span>
           <strong>{account.username}</strong>
         </div>
 
         <div className={styles.infoItem}>
-          <span>Email</span>
+          <span>Email </span>
           <strong>{account.email}</strong>
         </div>
 
         <div className={styles.infoItem}>
-          <span>Account Type</span>
+          <span>Account Type </span>
           <strong>{account.accountType}</strong>
         </div>
       </div>
@@ -96,6 +107,7 @@ const AccountDetails = () => {
         <button
           className={`${styles.actionBtn} ${styles.deposit}`}
           onClick={handleDeposit}
+          disabled={isInactive}
         >
           <PlusCircle size={18} />
           Deposit
@@ -104,6 +116,7 @@ const AccountDetails = () => {
         <button
           className={`${styles.actionBtn} ${styles.withdraw}`}
           onClick={handleWithdraw}
+          disabled={isInactive}
         >
           <MinusCircle size={18} />
           Withdraw
@@ -112,6 +125,7 @@ const AccountDetails = () => {
         <button
           className={`${styles.actionBtn} ${styles.transfer}`}
           onClick={handleTransfer}
+          disabled={isInactive}
         >
           <ArrowLeftRight size={18} />
           Transfer
