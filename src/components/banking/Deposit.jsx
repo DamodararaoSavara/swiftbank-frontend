@@ -13,7 +13,7 @@ const Deposit = () => {
   const handleDeposit = async (e) => {
     e.preventDefault();
     if (amount <= 0) {
-      alert("Enter valid deposit amount");
+      toast.error("Enter valid deposit amount");
       return;
     }
 
