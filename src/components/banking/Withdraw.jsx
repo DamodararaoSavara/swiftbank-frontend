@@ -13,7 +13,7 @@ const Withdraw = () => {
   const handleWithdraw = async (e) => {
     e.preventDefault();
     if (amount <= 0) {
-      alert("Enter valid withdrawal amount");
+      toast.error("Enter valid withdrawal amount");
       return;
     }
 
