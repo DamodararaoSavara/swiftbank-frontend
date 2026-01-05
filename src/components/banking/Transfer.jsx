@@ -29,21 +29,6 @@ const Transfer = () => {
     }
     try {
       setLoading(true);
-
-      // 🔍 Validate recipient account
-      await api.post(
-        `/account/${accountId}/transfer`,
-        {
-          toAccountId: Number(toAccountId),
-          amount: Number(amount),
-          otp: otp,
-        },
-        {
-          headers: {
-            "X-Request-Id": requestId,
-          },
-        }
-      );
       await api.post(`/account/${accountId}/transfer/otp`);
 
       toast.success("OTP sent successfully 📩");
