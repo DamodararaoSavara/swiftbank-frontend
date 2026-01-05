@@ -122,6 +122,9 @@ export default function Login({ onLogin }) {
         navigate("/forgot-password", { state: { email } });
       } else {
         toast.error("Email is not verified. Please verify your email first.");
+        setTimeout(() => {
+          navigate("/verify-otp");
+        }, 3000);
       }
     } catch (err) {
       toast.error("Something went wrong. Try again.");
